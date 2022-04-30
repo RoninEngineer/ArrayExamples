@@ -26,6 +26,12 @@ namespace ArrayFunctions
             Console.WriteLine();
             Console.WriteLine($"Search index returned : {searchIndex}");
             Console.ReadLine();
+
+            // Reverses contents of array
+            int[] reverses = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            var result = ReverseArray(reverses); 
+            Array.ForEach(result, Console.Write);
+            Console.ReadLine();
         }
 
         public static int[] ZeroDuplicates(int[] nums)
@@ -63,6 +69,12 @@ namespace ArrayFunctions
             int itemIndex = Array.BinarySearch(nums, locateValue);
             return itemIndex;
 
+        }
+
+        public static int[] ReverseArray(int[] nums)
+        {
+            Array.Reverse(nums);
+            return nums;
         }
 
         
