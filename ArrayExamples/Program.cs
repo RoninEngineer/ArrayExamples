@@ -1,13 +1,26 @@
 ﻿using System;
+using System.Linq;
 
-namespace ArrayFunctions 
+namespace ArrayFunctions
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             int[] nums = { 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1 };
-            
+            List<int[]> arrayLists = new List<int[]>
+            {
+                new int[] { 1,2,3,4 },
+                new int[] { 5,6,7,8 },
+                new int[] { 9,10 }
+            };
+
+            List<int[,]> nestedArrays = new List<int[,]>
+            {
+                new int[,] {{1,2}, { 3,4} },
+                new int[,] {{5,6}, { 7,8} }
+            };
+
             // Zero duplicates in array
             var zeroedDups = ZeroDuplicates(nums);
             Array.ForEach(zeroedDups, Console.Write);
@@ -29,8 +42,14 @@ namespace ArrayFunctions
 
             // Reverses contents of array
             int[] reverses = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-            var result = ReverseArray(reverses); 
+            var result = ReverseArray(reverses);
             Array.ForEach(result, Console.Write);
+            Console.ReadLine();
+
+
+            // Flatten lists of integer arrays into a single array
+            var flattenListResult = FlattenArrayLists(arrayLists);
+            Array.ForEach(flattenListResult, Console.Write);
             Console.ReadLine();
         }
 
@@ -53,9 +72,9 @@ namespace ArrayFunctions
         {
             var temp = new HashSet<Int32>();
 
-            for(int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
-                if(!temp.Contains(nums[i]))
+                if (!temp.Contains(nums[i]))
                 {
                     temp.Add(nums[i]);
                 }
@@ -77,6 +96,20 @@ namespace ArrayFunctions
             return nums;
         }
 
-        
+        public static int[] FlattenArrayLists(List<int[]> arrayList)
+        {
+            List<int> results = new List<int>();
+
+            foreach (var array in arrayList)
+            {
+                int currentArrayLength = array.Count();
+                for (int i = 0; i < currentArrayLength; i++)
+                {
+                    results.Add(array[i]);
+                }
+            }
+
+            return results.ToArray<int>(); ;
+        }
     }
 }
