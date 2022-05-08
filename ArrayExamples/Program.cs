@@ -51,6 +51,12 @@ namespace ArrayFunctions
             var flattenListResult = FlattenArrayLists(arrayLists);
             Array.ForEach(flattenListResult, Console.Write);
             Console.ReadLine();
+
+            // Flatten list of multi-dimensional arrays into a single array
+            var flattenNestedArrayResult = FlattenNestedArrays(nestedArrays);
+            Array.ForEach(flattenNestedArrayResult, Console.Write);
+            Console.ReadLine();
+
         }
 
         public static int[] ZeroDuplicates(int[] nums)
@@ -110,6 +116,20 @@ namespace ArrayFunctions
             }
 
             return results.ToArray<int>(); ;
+        }
+
+        public static int[] FlattenNestedArrays(List<int[,]> nestedArrayList)
+        {
+            List<int> results = new List<int>();
+            foreach(var array in nestedArrayList)
+            {
+                foreach(var nested in array)
+                {
+                    results.Add((int)nested);
+                }
+
+            }
+            return results.ToArray<int>();
         }
     }
 }
